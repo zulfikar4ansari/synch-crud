@@ -1,13 +1,17 @@
 package com.synch_crud.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="employees")
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
+@Builder
 public class Employee
 {
     @Id
