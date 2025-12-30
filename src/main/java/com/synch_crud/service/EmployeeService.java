@@ -1,6 +1,7 @@
 package com.synch_crud.service;
 
 
+import com.synch_crud.dto.EmployeeResponse;
 import com.synch_crud.repository.EmployeeRepository;
 import com.synch_crud.dto.EmployeeRequest;
 import com.synch_crud.entity.Employee;
@@ -27,7 +28,7 @@ public class EmployeeService
 
     public Employee createEmployee(EmployeeRequest request)
     {
-        System.out.println("Hello");
+        System.out.println("HelloCreateEmployee");
         Employee employee = Employee.builder()
                 .name(request.name())
                 .department(request.department())
@@ -35,26 +36,18 @@ public class EmployeeService
         return employeeRepository.save(employee);
     }
 
-
-
-
-    public List<Employee> findAll() {
+    public List<Employee> findAllEmployee()
+    {
         return employeeRepository.findAll();
     }
-
-    public Employee findById(Long id) {
-        return employeeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "Employee not found with id: " + id));
+    public Employee findEmployeeById(Long id)
+    {
+        return  employeeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Resource Not available "+id));
     }
 
-   /* public Employee create(EmployeeRequest req) {
-        Employee emp = new Employee(req.name(), req.department(), req.salary());
-        return employeeRepository.save(emp);
-    }*/
-
     public Employee update(Long id, EmployeeRequest req) {
-        Employee emp = findById(id);
+        Employee emp = findEmployeeById(id);
         emp.setName(req.name());
         emp.setDepartment(req.department());
         emp.setSalary(req.salary());
@@ -62,7 +55,9 @@ public class EmployeeService
     }
 
     public void delete(Long id) {
-        Employee emp = findById(id);
+        Employee emp = findEmployeeById(id);
         employeeRepository.delete(emp);
     }
+
+
 }
